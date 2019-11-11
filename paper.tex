@@ -1,0 +1,65 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage[style=ieee]{biblatex}
+\addbibresource{refs.bib}
+
+\begin{document}
+\title{Characterizing hippocampal replay using hybrid point process state space models}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Eric L. Denovellis}
+\IEEEauthorblockA{\textit{Dept. of Physiology} \\
+\textit{Univ. of California, San Francisco}\\
+San Francisco, CA, USA \\
+eric.denovellis@ucsf.edu}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Loren M. Frank}
+\IEEEauthorblockA{\textit{Dept. of Physiology} \\
+\textit{Univ. of California, San Francisco}\\
+San Francisco, CA, USA \\
+loren@phy.ucsf.edu}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Uri T. Eden}
+\IEEEauthorblockA{\textit{Dept. of Mathematics and Statistics} \\
+\textit{Boston University}\\
+Boston, MA, USA \\
+tzvi@bu.edu}
+
+}
+
+\maketitle
+
+\begin{abstract}
+In the hippocampus, replay sequences are temporally compressed patterns of cell activity that resemble patterns that occur when the animal is moving through the environment. Because replay sequences typically occur when the animal is at rest, replay is hypothesized to be part of an internal cognitive process that enables the retrieval of past spatial memories and the planning of future movement. Traditionally, replay sequences have been discovered by looking for sharp wave ripples---high frequency oscillations that occur in association with replay---and then looking for spatially continuous patterns of cell activity; however, it has become clear that this does not fully depict the complexity of replay sequences. Replay sequences do not always co-occur with sharp wave ripples, have more complex dynamics than spatially continuous movement, have different temporal ordering than during movement, and change based on task. In this work, we introduce a hybrid state space framework to describe the richness of replay sequences. We show how defining discrete latent states associated with continuous latent dynamics and point process observations allows us to identify when replay sequences occur, categorize the type of sequence based on their proscribed continuous dynamics, and decode the “imagined” spatial trajectory corresponding to the replay sequence.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+State-space methods, Hippocampus, Replay
+\end{IEEEkeywords}
+
+\section{Introduction}
+A central question in neuroscience is how patterns of neuronal activity in the brain correspond to the formation and use of memories. But understanding memory is challenging because it is a brief, unobserved, internal state of mind which does not necessarily correspond to the animal’s current behavior. Furthermore, the corresponding neuronal activity patterns in the brain are noisy, high-dimensional, and can rapidly change on short timescales. As a result, neuroscientists need statistical methods that are flexible enough to capture the dynamically changing state of the brain, but remain interpretable enough to understand what those states are.
+
+An example of this challenge is hippocampal replay. In the hippocampus---a brain area known for its role in memory and early learning---neurons selectively respond based on position in the environment \cite{OKeefehippocampusspatialmap1971}; the population pattern of activity reflecting the trajectory of the animal. When the animal is asleep or immobile, these activity patterns reappear, but on a shorter timescale \cite{WilsonReactivationhippocampalensemble1994, NadasdyReplayTimeCompression1999}. Because of the similarity of the patterns to previous behavior and the compressed nature of the activity, the “replayed” activity patterns are thought to correspond to memories. But recent work has shown that the replayed pattern of activity can be quite diverse. For example, replays can occur in the opposite activity pattern as when they occurred during behavior \cite{FosterReversereplaybehavioural2006, DibaForwardreversehippocampal2007}, can correspond to different environments \cite{KarlssonAwakereplayremote2009}, can have finer timescale dynamics \cite{PfeifferAutoassociativedynamicsgeneration2015}.
+
+Point process state space models are well known as a solution to this type of phenomenon. Previously, we have used . But currently state space models are not flexible enough to deal with rapidly changing state while remaining interpretable. We have previously formulated a model where xinyi, but this cannot switch between states.
+
+Here we develop a general state-space state space framework for characterizing hippocampal replay that can: features. We show that by mixing discrete and latent states and being precise about features of what needs to be characterized can allow scientists to target specific patterns. We show two brief examples of how this is done.
+
+\section{Methods}
+
+\subsection{}
+\section{Results}
+\section{Conclusion}
+In this work, we have developed a point process state-space framework for understanding hippocampal replay that incorporates both continuous and discrete latent states. We showed this framework is flexible: it can be deployed to characterize whether a replay represents spatially continuous trajectories or spatially discontinuous trajectories or it can be deployed to characterize local and non-local patterns of activity. Although we have only shown two examples of this framework, one could imagine combining the examples into one model---specifying that only during non-local states do we care about whether the trajectory is spatially continuous or not for example---or specifying more complicated conditions. All one has to specify is the initial condition, the likelihood, and state transition dynamic associated with each discrete state. The discrete state is then immediately interpretable in terms of the model.
+
+This combination of interpretability and flexibility makes the framework is extremely powerful. By formulating what needs to be characterized mathematically, neuroscientists are forced to explicitly formulate their mental model of the replay characteristics of interest. This model can then be evaluated based on the data, criticized if the model assumptions are not adequate and improved into a better model. This iterative model building approach should be particularly powerful with respect to the hippocampus, where there are well-established features of the data and corresponding theories about the functioning of the hippocampus. The richness of data and theory allows scientists to take advantage of both the flexibility of the framework and the specificity that it allows.
+
+
+\section*{Acknowledgment}
+\printbibliography{}
+\end{document}
