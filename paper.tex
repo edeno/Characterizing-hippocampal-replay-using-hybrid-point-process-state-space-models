@@ -42,15 +42,33 @@ State-space methods, Hippocampus, Replay
 \end{IEEEkeywords}
 
 \section{Introduction}
-A central question in neuroscience is how patterns of neuronal activity in the brain correspond to the formation and use of memories. But understanding memory is challenging because it is a brief, unobserved, internal state of mind which does not necessarily correspond to the animal’s current behavior. Furthermore, the corresponding neuronal activity patterns in the brain are noisy, high-dimensional, and can rapidly change on short timescales. As a result, neuroscientists need statistical methods that are flexible enough to capture the dynamically changing state of the brain, but remain interpretable enough to understand what those states are.
+A central question in neuroscience is how patterns of neuronal activity in the brain correspond to the formation and use of memories. But understanding memory is challenging because it is a unobserved, internal state of mind which does not necessarily correspond to the animal’s current behavior. Furthermore, the corresponding neuronal activity patterns in the brain are noisy, high-dimensional, and can rapidly change on short timescales. As a result, neuroscientists need statistical methods that are flexible enough to capture the dynamically changing state of the brain, but remain interpretable enough to understand what those states are.
 
-An example of this challenge is hippocampal replay. In the hippocampus---a brain area known for its role in memory and early learning---neurons selectively respond based on position in the environment \cite{OKeefehippocampusspatialmap1971}; the population pattern of activity reflecting the trajectory of the animal. When the animal is asleep or immobile, these activity patterns reappear, but on a shorter timescale \cite{WilsonReactivationhippocampalensemble1994, NadasdyReplayTimeCompression1999}. Because of the similarity of the patterns to previous behavior and the compressed nature of the activity, the “replayed” activity patterns are thought to correspond to memories. But recent work has shown that the replayed pattern of activity can be quite diverse. For example, replays can occur in the opposite activity pattern as when they occurred during behavior \cite{FosterReversereplaybehavioural2006, DibaForwardreversehippocampal2007}, can correspond to different environments \cite{KarlssonAwakereplayremote2009}, can have finer timescale dynamics \cite{PfeifferAutoassociativedynamicsgeneration2015}.
+An example of this challenge is hippocampal replay. In the hippocampus---a brain area known for its role in memory and early learning---neurons selectively respond based on position in the environment \cite{OKeefehippocampusspatialmap1971}; the population pattern of activity reflecting the trajectory of the animal. When the animal is asleep or immobile, these activity patterns reappear, but on a shorter timescale \cite{WilsonReactivationhippocampalensemble1994, NadasdyReplayTimeCompression1999}. Because of the similarity of the patterns to previous behavior and the compressed nature of the activity, the “replayed” activity patterns are thought to correspond to memories. But recent work has shown that the replayed pattern of activity can be quite diverse. For example, replays can occur in the opposite activity pattern as when they occurred during behavior \cite{FosterReversereplaybehavioural2006, DibaForwardreversehippocampal2007}, can correspond to different environments \cite{KarlssonAwakereplayremote2009}, and can have finer timescale dynamics \cite{PfeifferAutoassociativedynamicsgeneration2015}.
 
-Point process state space models are well known as a solution to this type of phenomenon. Previously, we have used . But currently state space models are not flexible enough to deal with rapidly changing state while remaining interpretable. We have previously formulated a model where xinyi, but this cannot switch between states.
-
-Here we develop a general state-space state space framework for characterizing hippocampal replay that can: features. We show that by mixing discrete and latent states and being precise about features of what needs to be characterized can allow scientists to target specific patterns. We show two brief examples of how this is done.
+Point process state space models have been successful solution to categorizing different types of replay via their dynamics. Previously, we have used state space models with parallel point process filters to classify task dependent trajectories in a real-time setting \cite{DengRapidclassificationhippocampal2016}. Here we extend that model to a general state-space state space framework for characterizing hippocampal replay. In particular, we show how this framework can: (1) allow for switching between discrete states by adding in a model of the discrete dynamics (2) used in offline analysis by adding a smoother, and (3) be flexible and interpretable by showing two examples of categorizing different features of hippocampal replay.
 
 \section{Methods}
+Let $x(t)$ be a continuous latent or semi-latent variable that corresponds to the position represented by the population of neurons and $I$ be a discrete latent variable that corresponds to some category of replay. For example, this discrete state could be an indicator that corresponds to task dependent forward and reverse replays as in \cite{DengRapidclassificationhippocampal2016}, replays that represent the current spatial environment versus a previously experienced spatial environment We would like to infer the joint probability of $p(x_{k}, I_{k} \mid \Delta N_{1:k}, \vec{m}_{1:k})$
+
+We can use Bayes theorem to define the posterior in terms of the likelihood $p(\Delta N_{k}, \vec{m}_{k} \mid x_{k}, I_{k})$ and a prior ($p(x_{k}, I_{k} \mid \Delta N_{1:k-1}, \vec{m}_{1:k-1}$).
+\begin{equation}
+p(x_{k}, I_{k} \mid \Delta N_{1:k}, \vec{m}_{1:k}) \propto p(\Delta N_{k}, \vec{m}_{k} \mid x_{k}, I_{k}) p(x_{k}, I_{k} \mid \Delta N_{1:k-1}, \vec{m}_{1:k-1}) \nonumber
+\end{equation}
+
+We can then use Chapman-Kolmogorov to define prior in terms of previous time step's posterior and state transitions
+\begin{IEEEeqnarray}{rCl}
+p(x_{k}, I_{k} \mid \Delta N_{1:k-1}, \vec{m}_{1:k-1}) = \nonumber\\ 
+\sum_{I_{k-1}} \int p(x_{k} \mid x_{k-1}, I_{k}, I_{k-1}) Pr(I_{k} \mid I_{k-1}) p(x_{k-1}, I_{k-1} \mid \Delta N_{1:k-1}, \vec{m}_{1:k-1} dx_{k-1}) \nonumber
+\end{IEEEeqnarray}
+
+So we end up with:
+\begin{equation}
+p(x_{k}, I_{k} \mid \Delta N_{1:k} \vec{m}_{1:k}) \propto p(\Delta N_{k}, \vec{m}_{k} \mid x_{k}, I_{k}) \sum_{I_{k-1}} \int p(x_{k} \mid x_{k-1}, I_{k}, I_{k-1}) Pr(I_{k} \mid I_{k-1}) p(x_{k-1}, I_{k-1} \mid \Delta N_{1:k-1}, \vec{m}_{1:k-1} dx_{k-1})
+\end{equation}
+as the final filter.
+
+For the smoother, 
 
 \subsection{}
 \section{Results}
@@ -60,6 +78,6 @@ In this work, we have developed a point process state-space framework for unders
 This combination of interpretability and flexibility makes the framework is extremely powerful. By formulating what needs to be characterized mathematically, neuroscientists are forced to explicitly formulate their mental model of the replay characteristics of interest. This model can then be evaluated based on the data, criticized if the model assumptions are not adequate and improved into a better model. This iterative model building approach should be particularly powerful with respect to the hippocampus, where there are well-established features of the data and corresponding theories about the functioning of the hippocampus. The richness of data and theory allows scientists to take advantage of both the flexibility of the framework and the specificity that it allows.
 
 
-\section*{Acknowledgment}
-\printbibliography{}
+\section*{Acknowledgments}
+\printbibliography
 \end{document}
