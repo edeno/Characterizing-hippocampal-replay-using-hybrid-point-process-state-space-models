@@ -110,11 +110,11 @@ This is just the one-step prediction density for the current time step's filter 
 \subsection{Estimation}
 \section{Results}
 \subsection{Example 1}
-\begin{figure}[htbp]
-\centerline{\includegraphics{fig1.png}}
+\begin{figure*}[htbp]
+\centerline{\includegraphics{fig1.pdf}}
 \caption{Example of a figure caption.}
 \label{fig}
-\end{figure}
+\end{figure*}
 \subsection{Example 2}
 \section{Conclusion}
 In this work, we have developed a point process state-space framework for understanding hippocampal replay that associates discrete latent states with continuous latent dynamics and allows for switching between the discrete states. We showed this framework is flexible: it can be deployed to characterize whether a replay represents spatially continuous trajectories or spatially discontinuous trajectories or it can be deployed to characterize local and non-local patterns of activity. Although we have only shown two examples of this framework, one could imagine combining the examples into one model---specifying that only during non-local states do we care about whether the trajectory is spatially continuous or not for example---or specifying more complicated conditions. All one has to specify is the initial condition, the likelihood, and state transition dynamic associated with each discrete state. The discrete state is then immediately interpretable in terms of the model.
